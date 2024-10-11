@@ -12,6 +12,7 @@ struct TextInputView: View {
 
     @Binding var text: String
     var inputFieldId: UUID
+    var placeholder: String
     var style: InputViewStyle
     var availableInput: AvailableInputType
 
@@ -19,7 +20,7 @@ struct TextInputView: View {
         TextField("", text: $text, axis: .vertical)
             .customFocus($globalFocusState.focus, equals: .uuid(inputFieldId))
             .placeholder(when: text.isEmpty) {
-                Text(style.placeholder)
+                Text(placeholder)
                     .foregroundColor(theme.colors.buttonBackground)
             }
             .foregroundColor(style == .message ? theme.colors.textLightContext : theme.colors.textDarkContext)

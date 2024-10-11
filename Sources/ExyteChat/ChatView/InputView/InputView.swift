@@ -11,15 +11,6 @@ import ExyteMediaPicker
 public enum InputViewStyle {
     case message
     case signature
-
-    var placeholder: String {
-        switch self {
-        case .message:
-            return "Type a message..."
-        case .signature:
-            return "Add signature..."
-        }
-    }
 }
 
 public enum InputViewAction {
@@ -92,6 +83,7 @@ struct InputView: View {
     @ObservedObject var viewModel: InputViewModel
     var inputFieldId: UUID
     var style: InputViewStyle
+    var placeholder: String
     var availableInput: AvailableInputType
     var messageUseMarkdown: Bool
     var recorderSettings: RecorderSettings = RecorderSettings()
@@ -174,7 +166,7 @@ struct InputView: View {
             case .isRecordingTap:
                 recordingInProgress
             default:
-                TextInputView(text: $viewModel.text, inputFieldId: inputFieldId, style: style, availableInput: availableInput)
+                TextInputView(text: $viewModel.text, inputFieldId: inputFieldId, placeholder: placeholder, style: style, availableInput: availableInput)
             }
         }
         .frame(minHeight: 48)

@@ -76,6 +76,7 @@ public struct ChatView<MessageContent: View, InputViewContent: View, MenuAction:
     // MARK: - Parameters
 
     let type: ChatType
+    let inputPlaceholder: String
     let sections: [MessagesSection]
     let ids: [String]
     let didSendMessage: (DraftMessage) -> Void
@@ -142,12 +143,14 @@ public struct ChatView<MessageContent: View, InputViewContent: View, MenuAction:
 
     public init(messages: [Message],
                 chatType: ChatType = .conversation,
+                inputPlaceholder: String = "Type a message...",
                 replyMode: ReplyMode = .quote,
                 didSendMessage: @escaping (DraftMessage) -> Void,
                 messageBuilder: @escaping MessageBuilderClosure,
                 inputViewBuilder: @escaping InputViewBuilderClosure,
                 messageMenuAction: MessageMenuActionClosure?) {
         self.type = chatType
+        self.inputPlaceholder = inputPlaceholder
         self.didSendMessage = didSendMessage
         self.sections = ChatView.mapMessages(messages, chatType: chatType, replyMode: replyMode)
         self.ids = messages.map { $0.id }
@@ -355,6 +358,7 @@ public struct ChatView<MessageContent: View, InputViewContent: View, MenuAction:
                     viewModel: inputViewModel,
                     inputFieldId: viewModel.inputFieldId,
                     style: .message,
+                    placeholder: inputPlaceholder,
                     availableInput: availablelInput,
                     messageUseMarkdown: messageUseMarkdown,
                     recorderSettings: recorderSettings

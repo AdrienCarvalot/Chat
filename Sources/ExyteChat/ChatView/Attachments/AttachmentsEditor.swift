@@ -120,6 +120,7 @@ struct AttachmentsEditor<InputViewContent: View>: View {
                     viewModel: inputViewModel,
                     inputFieldId: UUID(),
                     style: .signature,
+                    placeholder: "Type a message",
                     availableInput: availableInput,
                     messageUseMarkdown: messageUseMarkdown
                 )
